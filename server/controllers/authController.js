@@ -1,6 +1,6 @@
 import userModel from "../models/userModel.js";
 import { hashPassword } from "./../helpers/authHelper.js";
-const registerController = async () => {
+const registerController = async (req, res) => {
 
 	try {
 
@@ -23,7 +23,7 @@ const registerController = async () => {
 		}
 
 		//existing user 
-		const existingUser = await userModel.findOne({ email })
+		const existingUser = await userModel.findOne({ email })//key-value pair are same {email:email}
 
 		if (existingUser) {
 			res.status(200).send({
@@ -34,12 +34,22 @@ const registerController = async () => {
 		//register user
 		const hashedPassword = await hashPassword(password)
 		//save
-		const user = new userModel({ name, email, phone, address, password: hashedPassword }).save();
-		res.status(201).send({ success: true, message: "User Register Successfully", user })
+		const user = await new userModel({
+			name,
+			email,
+			phone,
+			address,
+			password: hashedPassword
+		}).save();
+		res.status(201).send({
+			success: true,
+			message: "User Register Successfully",
+			user
+		})
 	}
 	catch (error) {
 		console.log(error);
-		res.status(500).send({ success: false, message: "Erro in Registration", error })
+		res.status(500).send({ success: false, message: "Error in Registration", error })
 	}
 }
 
