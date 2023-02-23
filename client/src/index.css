@@ -48,7 +48,8 @@ font-family: 'Poppins', sans-serif;
 
 }
 
-==========footer=============*/ .footer {
+/* ==========footer=============*/
+*/ .footer {
   color: white;
   padding: 25px;
   background: #000000;
@@ -112,4 +113,16 @@ font-family: 'Poppins', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ================================ */
+/* =================Register=============== */
+
+.register {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  flex-direction: column;
 }

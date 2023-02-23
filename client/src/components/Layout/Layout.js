@@ -1,18 +1,37 @@
 import React from 'react'
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from "react-helmet"
 import Footer from './Footer'
 import Header from './Header'
-const Layout = (props) => {
+const Layout = ({ children, title, description, keywords, author }) => {
 	return (
 		<div>
+			<Helmet>
+				<meta charSet="utf-8" />
+				<meta name="description" content={description} />
+				<meta name="keywords" content={keywords} />
+				<meta name="author" content={author} />
+				<title>{title}</title>
+			</Helmet>
 			<Header />
 			<main style={{
 				minHeight: '70vh'
-			}}>{props.children}</main>
+			}}>
+				<ToastContainer />
+				{children}
+			</main>
 			<Footer />
 		</div>
 	)
 }
-
+Layout.defaultProps = {
+	title: "Ecommerce app - shop now",
+	description: "mern stack project",
+	keywords: "mern,react,node,mongodb",
+	author: "Techinfoyt",
+};
 export default Layout
 
 // you can destructure the props like : {children} in argument 
